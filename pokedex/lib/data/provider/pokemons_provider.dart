@@ -5,13 +5,25 @@ import 'package:pokedex/di.dart';
 
 class PokemonsProvider extends DioProvider {
   final String allPokemonPath = '/pokemon';
-  Future<Response> getAllPokemons() async {
+
+  Future<Response> getAllPokemons(int limit, int offset) async {
     try {
-      final result = await dio.get(allPokemonPath);
+      final result =
+          await dio.get("$allPokemonPath/?limit=$limit&offset=$offset");
       return result;
     } on DioError catch (error) {
       Log.e(error);
-      throw 'Error obteniendo pokemons';
+      throw 'Error obtaining pokemons';
+    }
+  }
+
+  Future<Response> getPokemonDetails(int pokeId) async {
+    try {
+      final result = await dio.get("$allPokemonPath/$pokeId");
+      return result;
+    } on DioError catch (error) {
+      Log.e(error);
+      throw 'Error obtaining pokemon details';
     }
   }
 }
