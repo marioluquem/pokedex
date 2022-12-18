@@ -12,4 +12,9 @@ class PokemonSimpleInfoModel with _$PokemonSimpleInfoModel {
       _$PokemonSimpleInfoModelFromJson(json);
 
   PokemonSimpleInfoModel._();
+
+  int get id => int.parse((url.split('/')..removeLast()).last);
+
+  String get photoURL =>
+      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${((url.split('/')..removeLast()).last)}.png";
 }
