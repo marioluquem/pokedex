@@ -26,3 +26,14 @@ It's not an app bug, but an API's :)
 
 ## Intructions to install the app
 
+In case of not beign able to run the app in Visual code, I'm leaving in the project's root folder the "mariospokedex.apk" file so anyone can install it in their devices and test it on Android. And for iOS I generated a link so anyone can download the app from there https://i.diawi.com/APMrVW. If have any questions about something please text me to my whatsapp or my email marioluquem@hotmail.com
+
+- Install flutter if you dont have it (version 3.3.5):
+    https://docs.flutter.dev/get-started/install/macos
+    https://docs.flutter.dev/get-started/install/windows
+- Open the project in Visual Code
+- Run the command "flutter clean"
+- Run the command "flutter pub get"
+- Press F1 (or CMD+F1) to select the device to use (emulator or physical device)
+- Press F5 (or CMD+F5) to run the project
+- Use the app

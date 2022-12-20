@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Pokédex',
+      title: 'Mario\'s Pokedex',
       debugShowCheckedModeBanner: false,
       home: const HomeUI(),
       routes: routes,
