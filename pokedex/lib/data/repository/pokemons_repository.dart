@@ -1,4 +1,5 @@
 import 'package:pokedex/data/model/pokemon_details_model.dart';
+import 'package:pokedex/data/model/pokemon_evolutions_model.dart';
 import 'package:pokedex/data/model/pokemon_list_response_model.dart';
 import 'package:pokedex/data/provider/pokemons_provider.dart';
 import 'package:pokedex/di.dart';
@@ -10,19 +11,19 @@ class PokemonsRepository {
     _pokemonsProvider = pokemonsProvider;
   }
 
-  Future<ResponsePokemonListModel?> fetchAllPokemons(
-      int limit, int offset) async {
+  Future<PokemonListModel?> fetchAllPokemons(int limit, int offset) async {
     try {
-      final response = await _pokemonsProvider.getAllPokemons(limit, offset);
-      return ResponsePokemonListModel.fromJson(response.data);
+      final response = await _pokemonsProvider.fetchAllPokemons(limit, offset);
+      return PokemonListModel.fromJson(response.data);
     } catch (e) {
       Log.e(e);
     }
+    return null;
   }
 
   Future<PokemonDetailsModel?> fetchPokemonDetails(int pokeId) async {
     try {
-      final response = await _pokemonsProvider.getPokemonDetails(pokeId);
+      final response = await _pokemonsProvider.fetchPokemonDetails(pokeId);
       PokemonDetailsModel poke = PokemonDetailsModel.fromJson(response.data);
       poke = poke.copyWith(
           imageURL:
@@ -32,5 +33,16 @@ class PokemonsRepository {
       Log.e(e);
       Log.e(stacktrace);
     }
+    return null;
+  }
+
+  Future<PokemonEvolutionsModel?> fetchPokemonEvolutions(int pokeId) async {
+    try {
+      final response = await _pokemonsProvider.fetchPokemonEvolutions(pokeId);
+      return PokemonEvolutionsModel.fromJson(response.data);
+    } catch (e) {
+      Log.e(e);
+    }
+    return null;
   }
 }

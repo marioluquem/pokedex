@@ -7,6 +7,8 @@ class DetailInitialState extends DetailState {
   DetailInitialState(this.poke);
 }
 
+class DetailLoadingState extends DetailState {}
+
 class DetailDataLoadedState extends DetailState {
   final PokemonDetailsModel pokeDetails;
 

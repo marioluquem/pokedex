@@ -5,14 +5,13 @@ part 'pokemon_list_response_model.freezed.dart';
 part 'pokemon_list_response_model.g.dart';
 
 @freezed
-class ResponsePokemonListModel with _$ResponsePokemonListModel {
-  factory ResponsePokemonListModel(
-          {required int count,
-          required String next,
-          @Default(null) String? previous,
-          required List<PokemonSimpleInfoModel> results}) =
-      _ResponsePokemonListModel;
+class PokemonListModel with _$PokemonListModel {
+  factory PokemonListModel(
+      {required int count,
+      required String next,
+      @Default(null) String? previous,
+      required List<PokemonSimpleInfoModel> results}) = _PokemonListModel;
 
-  factory ResponsePokemonListModel.fromJson(Map<String, dynamic> json) =>
-      _$ResponsePokemonListModelFromJson(json);
+  factory PokemonListModel.fromJson(Map<String, dynamic> json) =>
+      _$PokemonListModelFromJson(json);
 }

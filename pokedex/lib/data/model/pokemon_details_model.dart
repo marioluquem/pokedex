@@ -8,6 +8,7 @@ import 'dart:convert';
 import 'package:pokedex/data/model/abilities_model.dart';
 import 'package:pokedex/data/model/game_index.dart';
 import 'package:pokedex/data/model/move_model.dart';
+import 'package:pokedex/data/model/pokemon_evolutions_model.dart';
 import 'package:pokedex/data/model/species_model.dart';
 import 'package:pokedex/data/model/sprites_model.dart';
 import 'package:pokedex/data/model/stat_model.dart';
@@ -44,6 +45,7 @@ abstract class PokemonDetailsModel with _$PokemonDetailsModel {
     required List<Stat>? stats,
     required List<TypeModel>? types,
     required int? weight,
+    PokemonEvolutionsModel? evolutions,
   }) = _PokemonDetailsModel;
 
   factory PokemonDetailsModel.fromJson(Map<String, dynamic> json) =>

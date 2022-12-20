@@ -27,8 +27,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   _fetchPokemons(Emitter<HomeState> emit) async {
-    ResponsePokemonListModel? response = await _pokemonsRepository
-        .fetchAllPokemons(_cardsPerRequest, state.page * _cardsPerRequest);
+    PokemonListModel? response = await _pokemonsRepository.fetchAllPokemons(
+        _cardsPerRequest, state.page * _cardsPerRequest);
 
     if (response == null) {
       emit(HomeErrorState('Error getting pokémons list'));

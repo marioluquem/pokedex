@@ -8,6 +8,8 @@ class DetailInitialEvent extends DetailEvent {
   DetailInitialEvent(this.id);
 }
 
+class DetailLoadingEvent extends DetailEvent {}
+
 class DetailDataLoadedEvent extends DetailEvent {
   final PokemonDetailsModel pokeDetails;
 
