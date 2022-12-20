@@ -44,6 +44,10 @@ _$_PokemonDetailsModel _$$_PokemonDetailsModelFromJson(
           ?.map((e) => TypeModel.fromJson(e as Map<String, dynamic>))
           .toList(),
       weight: json['weight'] as int?,
+      evolutions: json['evolutions'] == null
+          ? null
+          : PokemonEvolutionsModel.fromJson(
+              json['evolutions'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_PokemonDetailsModelToJson(
@@ -68,4 +72,5 @@ Map<String, dynamic> _$$_PokemonDetailsModelToJson(
       'stats': instance.stats,
       'types': instance.types,
       'weight': instance.weight,
+      'evolutions': instance.evolutions,
     };

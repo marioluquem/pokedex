@@ -39,6 +39,7 @@ mixin _$PokemonDetailsModel {
   List<Stat>? get stats => throw _privateConstructorUsedError;
   List<TypeModel>? get types => throw _privateConstructorUsedError;
   int? get weight => throw _privateConstructorUsedError;
+  PokemonEvolutionsModel? get evolutions => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -71,10 +72,12 @@ abstract class $PokemonDetailsModelCopyWith<$Res> {
       Sprites? sprites,
       List<Stat>? stats,
       List<TypeModel>? types,
-      int? weight});
+      int? weight,
+      PokemonEvolutionsModel? evolutions});
 
   $SpeciesCopyWith<$Res>? get species;
   $SpritesCopyWith<$Res>? get sprites;
+  $PokemonEvolutionsModelCopyWith<$Res>? get evolutions;
 }
 
 /// @nodoc
@@ -109,6 +112,7 @@ class _$PokemonDetailsModelCopyWithImpl<$Res, $Val extends PokemonDetailsModel>
     Object? stats = freezed,
     Object? types = freezed,
     Object? weight = freezed,
+    Object? evolutions = freezed,
   }) {
     return _then(_value.copyWith(
       imageURL: freezed == imageURL
@@ -187,6 +191,10 @@ class _$PokemonDetailsModelCopyWithImpl<$Res, $Val extends PokemonDetailsModel>
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
               as int?,
+      evolutions: freezed == evolutions
+          ? _value.evolutions
+          : evolutions // ignore: cast_nullable_to_non_nullable
+              as PokemonEvolutionsModel?,
     ) as $Val);
   }
 
@@ -211,6 +219,18 @@ class _$PokemonDetailsModelCopyWithImpl<$Res, $Val extends PokemonDetailsModel>
 
     return $SpritesCopyWith<$Res>(_value.sprites!, (value) {
       return _then(_value.copyWith(sprites: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $PokemonEvolutionsModelCopyWith<$Res>? get evolutions {
+    if (_value.evolutions == null) {
+      return null;
+    }
+
+    return $PokemonEvolutionsModelCopyWith<$Res>(_value.evolutions!, (value) {
+      return _then(_value.copyWith(evolutions: value) as $Val);
     });
   }
 }
@@ -242,12 +262,15 @@ abstract class _$$_PokemonDetailsModelCopyWith<$Res>
       Sprites? sprites,
       List<Stat>? stats,
       List<TypeModel>? types,
-      int? weight});
+      int? weight,
+      PokemonEvolutionsModel? evolutions});
 
   @override
   $SpeciesCopyWith<$Res>? get species;
   @override
   $SpritesCopyWith<$Res>? get sprites;
+  @override
+  $PokemonEvolutionsModelCopyWith<$Res>? get evolutions;
 }
 
 /// @nodoc
@@ -280,6 +303,7 @@ class __$$_PokemonDetailsModelCopyWithImpl<$Res>
     Object? stats = freezed,
     Object? types = freezed,
     Object? weight = freezed,
+    Object? evolutions = freezed,
   }) {
     return _then(_$_PokemonDetailsModel(
       imageURL: freezed == imageURL
@@ -358,6 +382,10 @@ class __$$_PokemonDetailsModelCopyWithImpl<$Res>
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
               as int?,
+      evolutions: freezed == evolutions
+          ? _value.evolutions
+          : evolutions // ignore: cast_nullable_to_non_nullable
+              as PokemonEvolutionsModel?,
     ));
   }
 }
@@ -384,7 +412,8 @@ class _$_PokemonDetailsModel implements _PokemonDetailsModel {
       required this.sprites,
       required final List<Stat>? stats,
       required final List<TypeModel>? types,
-      required this.weight})
+      required this.weight,
+      this.evolutions})
       : _abilities = abilities,
         _forms = forms,
         _gameIndices = gameIndices,
@@ -500,10 +529,12 @@ class _$_PokemonDetailsModel implements _PokemonDetailsModel {
 
   @override
   final int? weight;
+  @override
+  final PokemonEvolutionsModel? evolutions;
 
   @override
   String toString() {
-    return 'PokemonDetailsModel(imageURL: $imageURL, abilities: $abilities, baseExperience: $baseExperience, forms: $forms, gameIndices: $gameIndices, height: $height, heldItems: $heldItems, id: $id, isDefault: $isDefault, locationAreaEncounters: $locationAreaEncounters, moves: $moves, name: $name, order: $order, pastTypes: $pastTypes, species: $species, sprites: $sprites, stats: $stats, types: $types, weight: $weight)';
+    return 'PokemonDetailsModel(imageURL: $imageURL, abilities: $abilities, baseExperience: $baseExperience, forms: $forms, gameIndices: $gameIndices, height: $height, heldItems: $heldItems, id: $id, isDefault: $isDefault, locationAreaEncounters: $locationAreaEncounters, moves: $moves, name: $name, order: $order, pastTypes: $pastTypes, species: $species, sprites: $sprites, stats: $stats, types: $types, weight: $weight, evolutions: $evolutions)';
   }
 
   @override
@@ -537,7 +568,9 @@ class _$_PokemonDetailsModel implements _PokemonDetailsModel {
             (identical(other.sprites, sprites) || other.sprites == sprites) &&
             const DeepCollectionEquality().equals(other._stats, _stats) &&
             const DeepCollectionEquality().equals(other._types, _types) &&
-            (identical(other.weight, weight) || other.weight == weight));
+            (identical(other.weight, weight) || other.weight == weight) &&
+            (identical(other.evolutions, evolutions) ||
+                other.evolutions == evolutions));
   }
 
   @JsonKey(ignore: true)
@@ -562,7 +595,8 @@ class _$_PokemonDetailsModel implements _PokemonDetailsModel {
         sprites,
         const DeepCollectionEquality().hash(_stats),
         const DeepCollectionEquality().hash(_types),
-        weight
+        weight,
+        evolutions
       ]);
 
   @JsonKey(ignore: true)
@@ -600,7 +634,8 @@ abstract class _PokemonDetailsModel implements PokemonDetailsModel {
       required final Sprites? sprites,
       required final List<Stat>? stats,
       required final List<TypeModel>? types,
-      required final int? weight}) = _$_PokemonDetailsModel;
+      required final int? weight,
+      final PokemonEvolutionsModel? evolutions}) = _$_PokemonDetailsModel;
 
   factory _PokemonDetailsModel.fromJson(Map<String, dynamic> json) =
       _$_PokemonDetailsModel.fromJson;
@@ -643,6 +678,8 @@ abstract class _PokemonDetailsModel implements PokemonDetailsModel {
   List<TypeModel>? get types;
   @override
   int? get weight;
+  @override
+  PokemonEvolutionsModel? get evolutions;
   @override
   @JsonKey(ignore: true)
   _$$_PokemonDetailsModelCopyWith<_$_PokemonDetailsModel> get copyWith =>

@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:meta/meta.dart';
 import 'package:pokedex/data/model/pokemon_details_model.dart';
 import 'package:pokedex/data/model/pokemon_list_response_model.dart';
@@ -20,7 +19,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       : super(HomeInitial(const [], 0)) {
     _pokemonsRepository = pokemonsRepository;
     on<HomeInitialEvent>(_homeInitialEvent);
-    on<HomeRequestPokemonsEvent>(_homeRequestPokemonsEvent);
   }
 
   FutureOr<void> _homeInitialEvent(
@@ -29,8 +27,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   _fetchPokemons(Emitter<HomeState> emit) async {
-    ResponsePokemonListModel? response = await _pokemonsRepository
-        .fetchAllPokemons(_cardsPerRequest, state.page * _cardsPerRequest);
+    PokemonListModel? response = await _pokemonsRepository.fetchAllPokemons(
+        _cardsPerRequest, state.page * _cardsPerRequest);
 
     if (response == null) {
       emit(HomeErrorState('Error getting pokémons list'));
@@ -40,39 +38,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(HomeLoadingPokemonsState(state.listPokeDetails, state.page));
 
     Log.d(response.results);
-    final listPokemons = response.results;
 
-    List<PokemonDetailsModel> listPokeDetails = [];
-    listPokeDetails.addAll(state.listPokeDetails);
-    try {
-      for (PokemonSimpleInfoModel pokeSimple in listPokemons) {
-        final pokeId = (pokeSimple.url.split('/')..removeLast()).last;
-        final pokeDetails = await _fetchPokemonDetails(emit, int.parse(pokeId));
+    List<PokemonSimpleInfoModel> listPokeSimple = [];
+    listPokeSimple.addAll(state.listPokeDetails);
+    listPokeSimple.addAll(response.results);
 
-        listPokeDetails.add(pokeDetails);
-      }
-    } catch (error) {
-      Log.e('Error getting pokemon details');
-      emit(HomeErrorState('Error getting pokemon details'));
-      return;
-    }
-
-    Log.d(listPokeDetails);
-    emit(HomeDataLoadedState(listPokeDetails, state.page + 1));
+    Log.d(listPokeSimple);
+    emit(HomeDataLoadedState(listPokeSimple, state.page + 1));
   }
-
-  _fetchPokemonDetails(Emitter<HomeState> emit, int pokeId) async {
-    PokemonDetailsModel? pokemonDetails =
-        await _pokemonsRepository.fetchPokemonDetails(pokeId);
-
-    if (pokemonDetails == null) {
-      emit(HomeErrorState('Error getting pokémon details'));
-      return;
-    }
-
-    return pokemonDetails;
-  }
-
-  FutureOr<void> _homeRequestPokemonsEvent(
-      HomeRequestPokemonsEvent event, Emitter<HomeState> emit) {}
 }
