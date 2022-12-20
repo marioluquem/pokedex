@@ -199,7 +199,7 @@ class DetailUI extends StatelessWidget {
                 children: [
                   Text(
                     name,
-                    style: TextStyle(color: Colors.grey, fontSize: 20),
+                    style: const TextStyle(color: Colors.grey, fontSize: 20),
                   ),
                   const SizedBox(
                     width: 16,

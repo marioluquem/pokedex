@@ -1,6 +1,5 @@
 part of 'home_bloc.dart';
 
-@immutable
 abstract class HomeState {
   List<PokemonSimpleInfoModel> listPokeDetails;
   int page = 0;

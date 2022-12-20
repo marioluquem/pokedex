@@ -6,6 +6,7 @@ part of 'crystal_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore: non_constant_identifier_names
 _$_Crystal _$$_CrystalFromJson(Map<String, dynamic> json) => _$_Crystal(
       backDefault: json['backDefault'] as String,
       backShiny: json['backShiny'] as String,
@@ -17,6 +18,7 @@ _$_Crystal _$$_CrystalFromJson(Map<String, dynamic> json) => _$_Crystal(
       frontTransparent: json['frontTransparent'] as String,
     );
 
+// ignore: non_constant_identifier_names
 Map<String, dynamic> _$$_CrystalToJson(_$_Crystal instance) =>
     <String, dynamic>{
       'backDefault': instance.backDefault,

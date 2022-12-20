@@ -6,6 +6,7 @@ part of 'gold_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore: non_constant_identifier_names
 _$_Gold _$$_GoldFromJson(Map<String, dynamic> json) => _$_Gold(
       backDefault: json['backDefault'] as String,
       backShiny: json['backShiny'] as String,
@@ -14,6 +15,7 @@ _$_Gold _$$_GoldFromJson(Map<String, dynamic> json) => _$_Gold(
       frontTransparent: json['frontTransparent'] as String,
     );
 
+// ignore: non_constant_identifier_names
 Map<String, dynamic> _$$_GoldToJson(_$_Gold instance) => <String, dynamic>{
       'backDefault': instance.backDefault,
       'backShiny': instance.backShiny,

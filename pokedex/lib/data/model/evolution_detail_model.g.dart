@@ -6,6 +6,7 @@ part of 'evolution_detail_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore: non_constant_identifier_names
 _$_EvolutionDetail _$$_EvolutionDetailFromJson(Map<String, dynamic> json) =>
     _$_EvolutionDetail(
       gender: json['gender'],
@@ -30,6 +31,7 @@ _$_EvolutionDetail _$$_EvolutionDetailFromJson(Map<String, dynamic> json) =>
       turnUpsideDown: json['turnUpsideDown'] as bool?,
     );
 
+// ignore: non_constant_identifier_names
 Map<String, dynamic> _$$_EvolutionDetailToJson(_$_EvolutionDetail instance) =>
     <String, dynamic>{
       'gender': instance.gender,

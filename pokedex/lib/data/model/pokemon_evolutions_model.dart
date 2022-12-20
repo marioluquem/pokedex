@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'dart:convert';
 
 import 'package:pokedex/data/model/chain_model.dart';
 

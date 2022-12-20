@@ -6,10 +6,11 @@ part of 'pokemon_details_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore: non_constant_identifier_names
 _$_PokemonDetailsModel _$$_PokemonDetailsModelFromJson(
         Map<String, dynamic> json) =>
     _$_PokemonDetailsModel(
-      imageURL: json['imageURL'] as String? ?? null,
+      imageURL: json['imageURL'] as String?,
       abilities: (json['abilities'] as List<dynamic>?)
           ?.map((e) => Ability.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -50,6 +51,7 @@ _$_PokemonDetailsModel _$$_PokemonDetailsModelFromJson(
               json['evolutions'] as Map<String, dynamic>),
     );
 
+// ignore: non_constant_identifier_names
 Map<String, dynamic> _$$_PokemonDetailsModelToJson(
         _$_PokemonDetailsModel instance) =>
     <String, dynamic>{

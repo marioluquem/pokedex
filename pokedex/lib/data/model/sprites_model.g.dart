@@ -6,6 +6,7 @@ part of 'sprites_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore: non_constant_identifier_names
 _$_Sprites _$$_SpritesFromJson(Map<String, dynamic> json) => _$_Sprites(
       backDefault: json['backDefault'] as String?,
       backFemale: json['backFemale'] as String?,
@@ -26,6 +27,7 @@ _$_Sprites _$$_SpritesFromJson(Map<String, dynamic> json) => _$_Sprites(
           : Sprites.fromJson(json['animated'] as Map<String, dynamic>),
     );
 
+// ignore: non_constant_identifier_names
 Map<String, dynamic> _$$_SpritesToJson(_$_Sprites instance) =>
     <String, dynamic>{
       'backDefault': instance.backDefault,

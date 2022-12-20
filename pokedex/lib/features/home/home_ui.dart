@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pokedex/data/model/detail_ui_arguments_model.dart';
-import 'package:pokedex/di.dart';
-import 'package:pokedex/features/detail/bloc/detail_bloc.dart';
 import 'package:pokedex/features/detail/detail_ui.dart';
 import 'package:pokedex/features/home/bloc/home_bloc.dart';
 

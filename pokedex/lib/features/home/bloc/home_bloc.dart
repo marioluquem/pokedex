@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:pokedex/data/model/pokemon_details_model.dart';
 import 'package:pokedex/data/model/pokemon_list_response_model.dart';
 import 'package:pokedex/data/model/pokemon_simple_info_model.dart';
 import 'package:pokedex/data/repository/pokemons_repository.dart';

@@ -6,6 +6,7 @@ part of 'pokemon_evolutions_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore: non_constant_identifier_names
 _$_PokemonEvolutionsModel _$$_PokemonEvolutionsModelFromJson(
         Map<String, dynamic> json) =>
     _$_PokemonEvolutionsModel(
@@ -14,6 +15,7 @@ _$_PokemonEvolutionsModel _$$_PokemonEvolutionsModelFromJson(
       id: json['id'] as int,
     );
 
+// ignore: non_constant_identifier_names
 Map<String, dynamic> _$$_PokemonEvolutionsModelToJson(
         _$_PokemonEvolutionsModel instance) =>
     <String, dynamic>{

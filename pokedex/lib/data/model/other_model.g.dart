@@ -6,6 +6,7 @@ part of 'other_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore: non_constant_identifier_names
 _$_Other _$$_OtherFromJson(Map<String, dynamic> json) => _$_Other(
       dreamWorld: json['dreamWorld'] == null
           ? null
@@ -19,6 +20,7 @@ _$_Other _$$_OtherFromJson(Map<String, dynamic> json) => _$_Other(
               json['officialArtwork'] as Map<String, dynamic>),
     );
 
+// ignore: non_constant_identifier_names
 Map<String, dynamic> _$$_OtherToJson(_$_Other instance) => <String, dynamic>{
       'dreamWorld': instance.dreamWorld,
       'home': instance.home,

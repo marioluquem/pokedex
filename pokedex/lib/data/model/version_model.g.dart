@@ -6,6 +6,7 @@ part of 'version_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+// ignore: non_constant_identifier_names
 _$_Versions _$$_VersionsFromJson(Map<String, dynamic> json) => _$_Versions(
       generationI: json['generationI'] == null
           ? null
@@ -36,6 +37,7 @@ _$_Versions _$$_VersionsFromJson(Map<String, dynamic> json) => _$_Versions(
               json['generationViii'] as Map<String, dynamic>),
     );
 
+// ignore: non_constant_identifier_names
 Map<String, dynamic> _$$_VersionsToJson(_$_Versions instance) =>
     <String, dynamic>{
       'generationI': instance.generationI,
