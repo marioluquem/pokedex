@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:pokedex/data/model/pokemon_details_model.dart';
 import 'package:pokedex/data/repository/pokemons_repository.dart';
+import 'package:pokedex/di.dart';
 
 part 'detail_event.dart';
 part 'detail_state.dart';
@@ -21,8 +22,6 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
     emit(DetailLoadingState());
     PokemonDetailsModel? pokeDetails =
         await pokemonsRepository.fetchPokemonDetails(event.id);
-    final pokeEvolutions =
-        await pokemonsRepository.fetchPokemonEvolutions(event.id);
 
     if (pokeDetails == null) {
       emit(DetailErrorState('Error getting pokemon details'));
@@ -30,11 +29,17 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
     }
 
     //we set the evolutions
-    if (pokeEvolutions != null) {
-      pokeDetails = pokeDetails.copyWith(evolutions: pokeEvolutions);
+    try {
+      final pokeEvolutions =
+          await pokemonsRepository.fetchPokemonEvolutions(event.id);
+      if (pokeEvolutions != null) {
+        pokeDetails = pokeDetails.copyWith(evolutions: pokeEvolutions);
+      }
+    } catch (error) {
+      Log.d('Couldnt get pokemon evolutions');
     }
 
-    emit(DetailDataLoadedState(pokeDetails));
+    emit(DetailDataLoadedState(pokeDetails!));
   }
 
   FutureOr<void> _dataLoaded(
