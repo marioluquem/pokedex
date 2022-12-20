@@ -40,28 +40,43 @@ class DetailUI extends StatelessWidget {
           return Scaffold(
             body: Column(
               children: [
-                InkWell(
-                  onTap: () => Navigator.of(context).pop(false),
-                  child: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  ),
-                ),
                 Expanded(
                   child: Container(
                     width: double.maxFinite,
                     padding: const EdgeInsets.only(top: 40),
                     color: pokeColor,
-                    child: Column(
+                    child: Stack(
                       children: [
-                        const SizedBox(
-                          height: 16,
+                        Column(
+                          children: [
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            if (poke.imageURL != null)
+                              _pokeImage(poke, args, screenSize),
+                            const SizedBox(
+                              height: 24,
+                            ),
+                            _pokemonInfo(poke, pokeColor),
+                          ],
                         ),
-                        if (poke.imageURL != null) _pokeImage(poke, screenSize),
-                        const SizedBox(
-                          height: 24,
+                        Positioned(
+                          top: 0,
+                          left: 16,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              icon: const Icon(
+                                Icons.arrow_back,
+                                size: 30,
+                              ),
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
-                        _pokemonInfo(poke, pokeColor),
                       ],
                     ),
                   ),
@@ -69,18 +84,16 @@ class DetailUI extends StatelessWidget {
               ],
             ),
           );
-        } else {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: Colors.red,
-            ),
-          );
         }
+
+        return Container(
+          color: Colors.white,
+        );
       },
     );
   }
 
-  _pokeImage(PokemonDetailsModel poke, Size screenSize) {
+  _pokeImage(PokemonDetailsModel poke, Object? args, Size screenSize) {
     return Transform.scale(
         scale: 1.5,
         child: Stack(
@@ -95,7 +108,8 @@ class DetailUI extends StatelessWidget {
                   ),
                 )),
             Hero(
-              tag: "hero${poke.id}",
+              tag:
+                  "hero${args is DetailUIArgumentsModel ? args.pokeId : poke.id}",
               child: Image.network(
                 poke.imageURL!,
                 height: screenSize.height * 0.3,
@@ -222,7 +236,7 @@ class DetailUI extends StatelessWidget {
           Column(children: [
             Image.network(
                 "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${((evo!.species!.url.split('/')..removeLast()).last)}.png"),
-            Text(evo.species!.name),
+            Text(evo.species!.name.capitalizeFirst),
           ]),
         ],
       ));

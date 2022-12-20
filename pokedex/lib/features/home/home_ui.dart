@@ -40,9 +40,6 @@ class HomeUI extends StatelessWidget {
                         fontSize: 38,
                         fontFamily: 'Pokemon'),
                   ),
-                  // const SizedBox(
-                  //   height: 8,
-                  // ),
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
@@ -85,8 +82,6 @@ class HomeUI extends StatelessWidget {
                                   final poke = state.listPokeDetails[index];
                                   return InkWell(
                                     onTap: () {
-                                      getIt<DetailBloc>()
-                                          .add(DetailLoadingEvent());
                                       Navigator.of(context).pushNamed(
                                           DetailUI.path,
                                           arguments:
