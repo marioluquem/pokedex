@@ -3,9 +3,6 @@
 A simple pokedex app
 
 ## Getting Started
-
-To run freezed build runner: flutter packages pub run build_runner build --delete-conflicting-outputs
-
 ## Important Note about the pokemon's detail, please read:
 
 After implementing the PokeAPI realized that the evolution data is wrong in the API itself. So when entering the pokemon's detail page will show evolutions, however, not it's correct evolutions, but what the API brings for that pokemon. Example:
@@ -34,6 +31,7 @@ In case of not beign able to run the app in Visual code, I'm leaving in the proj
 - Open the project in Visual Code
 - Run the command "flutter clean"
 - Run the command "flutter pub get"
+- In case of an error with the classes freezed please run the following command: flutter packages pub run build_runner build --delete-conflicting-outputs
 - Press F1 (or CMD+F1) to select the device to use (emulator or physical device)
 - Press F5 (or CMD+F5) to run the project
 - Use the app
