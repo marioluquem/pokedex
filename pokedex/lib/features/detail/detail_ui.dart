@@ -4,9 +4,10 @@ import 'package:pokedex/data/enums/pokemon_types_enum.dart';
 import 'package:pokedex/data/model/chain_model.dart';
 import 'package:pokedex/data/model/detail_ui_arguments_model.dart';
 import 'package:pokedex/data/model/pokemon_details_model.dart';
-import 'package:pokedex/data/model/species_model.dart';
+import 'package:pokedex/di.dart';
 import 'package:pokedex/extensions/strings_ext.dart';
 import 'package:pokedex/features/detail/bloc/detail_bloc.dart';
+import 'package:pokedex/features/home/home_ui.dart';
 import 'package:pokedex/res.dart';
 
 class DetailUI extends StatelessWidget {
@@ -57,7 +58,7 @@ class DetailUI extends StatelessWidget {
                             const SizedBox(
                               height: 24,
                             ),
-                            _pokemonInfo(poke, pokeColor),
+                            _pokemonInfo(context, poke, pokeColor),
                           ],
                         ),
                         Positioned(
@@ -67,7 +68,8 @@ class DetailUI extends StatelessWidget {
                             alignment: Alignment.centerLeft,
                             child: IconButton(
                               onPressed: () {
-                                Navigator.of(context).pop();
+                                Navigator.of(context)
+                                    .pushReplacementNamed(HomeUI.path);
                               },
                               icon: const Icon(
                                 Icons.arrow_back,
@@ -119,7 +121,8 @@ class DetailUI extends StatelessWidget {
         ));
   }
 
-  _pokemonInfo(PokemonDetailsModel poke, Color pokeColor) {
+  _pokemonInfo(
+      BuildContext context, PokemonDetailsModel poke, Color pokeColor) {
     return Expanded(
       child: Container(
         width: double.maxFinite,
@@ -164,7 +167,7 @@ class DetailUI extends StatelessWidget {
                         .toList(),
                   ),
                 ),
-              if (poke.evolutions?.chain != null)
+              if (poke.evolutions?.chain.evolves_to?.isNotEmpty == true)
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   const SizedBox(
                     height: 16,
@@ -173,7 +176,9 @@ class DetailUI extends StatelessWidget {
                     'Evolutions',
                     style: TextStyle(color: Colors.grey, fontSize: 20),
                   ),
-                  Row(children: _createEvolutions(poke.evolutions?.chain, []))
+                  Row(
+                      children: _createEvolutions(
+                          context, poke.evolutions?.chain, []))
                 ]),
             ],
           ),
@@ -219,29 +224,40 @@ class DetailUI extends StatelessWidget {
     ]);
   }
 
-  List<Widget> _createEvolutions(Chain? chain, List<Widget> listAccum) {
-    Chain? evo = chain?.evolves_to?.first;
-    bool hasMoreEvolutions = evo?.species != null;
-    while (hasMoreEvolutions) {
-      listAccum.add(Row(
-        children: [
-          Row(
-            children: const [
-              Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.grey,
-              ),
-            ],
-          ),
-          Column(children: [
-            Image.network(
-                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${((evo!.species!.url.split('/')..removeLast()).last)}.png"),
-            Text(evo.species!.name.capitalizeFirst),
-          ]),
-        ],
-      ));
-      hasMoreEvolutions = evo.evolves_to != null && evo.evolves_to!.isNotEmpty;
-      if (hasMoreEvolutions) evo = evo.evolves_to!.first;
+  List<Widget> _createEvolutions(
+      BuildContext context, Chain? chain, List<Widget> listAccum) {
+    try {
+      Chain? evo = chain?.evolves_to?.first;
+      bool hasMoreEvolutions = evo?.species != null;
+      while (hasMoreEvolutions) {
+        final id = (evo!.species!.url.split('/')..removeLast()).last;
+        listAccum.add(Row(
+          children: [
+            Row(
+              children: const [
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.grey,
+                ),
+              ],
+            ),
+            InkWell(
+              onTap: () => Navigator.of(context).pushNamed(DetailUI.path,
+                  arguments: DetailUIArgumentsModel(int.parse(id))),
+              child: Column(children: [
+                Image.network(
+                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png"),
+                Text(evo.species!.name.capitalizeFirst),
+              ]),
+            ),
+          ],
+        ));
+        hasMoreEvolutions =
+            evo.evolves_to != null && evo.evolves_to!.isNotEmpty;
+        if (hasMoreEvolutions) evo = evo.evolves_to!.first;
+      }
+    } catch (error) {
+      Log.d('Pokemon has no evolutions');
     }
 
     return listAccum;

@@ -7,6 +7,7 @@ import 'package:pokedex/features/detail/detail_ui.dart';
 import 'package:pokedex/features/home/bloc/home_bloc.dart';
 
 import 'package:pokedex/extensions/strings_ext.dart';
+import 'package:pokedex/res.dart';
 
 class HomeUI extends StatelessWidget {
   static const String path = 'home';
@@ -14,6 +15,7 @@ class HomeUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {
@@ -26,6 +28,7 @@ class HomeUI extends StatelessWidget {
           final bloc = context.read<HomeBloc>();
           final isLoading = state is HomeLoadingPokemonsState;
           final itemCount = state.listPokeDetails.length;
+
           return SafeArea(
             child: Container(
               color: Colors.red.shade600,
@@ -58,8 +61,9 @@ class HomeUI extends StatelessWidget {
                               child: GridView.builder(
                                 itemCount: state.listPokeDetails.length,
                                 gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: 2,
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount:
+                                      screenSize.width > 400 ? 3 : 2,
                                   crossAxisSpacing: 10,
                                   mainAxisSpacing: 10,
                                 ),
@@ -98,11 +102,14 @@ class HomeUI extends StatelessWidget {
                                             Transform.scale(
                                               scale: 1.3,
                                               child: Hero(
-                                                tag: "hero${poke.id}",
-                                                child: Image.network(
-                                                  poke.photoURL,
-                                                ),
-                                              ),
+                                                  tag: "hero${poke.id}",
+                                                  child: FadeInImage(
+                                                    placeholder:
+                                                        const AssetImage(Res
+                                                            .pokeballBackground),
+                                                    image: NetworkImage(
+                                                        poke.photoURL),
+                                                  )),
                                             ),
                                             Text(
                                                 "#${index + 1} - ${poke.name.capitalizeFirst}")
